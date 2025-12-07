@@ -1,0 +1,81 @@
+<?php include 'header.php'; ?>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#blog">Blog</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#contacto">Contacto</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#chat">Chat Bot</a></li>
+  <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#faq">Ayuda / FAQ</a></li>
+</ul>
+
+<div class="tab-content p-3 border border-top-0">
+    
+    <div class="tab-pane fade show active" id="blog">
+        <h3>Blog del Chef</h3>
+        <p>Hoy hablaremos de la importancia de los ingredientes orgánicos...</p>
+        <hr>
+        <h5>Comentarios</h5>
+        <div id="areaComentarios"></div>
+        <div class="input-group mb-3">
+            <input type="text" id="inputComentario" class="form-control" placeholder="Escribe un comentario...">
+            <button class="btn btn-outline-secondary" type="button" onclick="publicarComentario()">Comentar</button>
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="contacto">
+        <h3>Contáctanos</h3>
+        <form action="mailto:correo@restaurante.com" method="post" enctype="text/plain">
+            <div class="mb-3"><label>Correo Electrónico</label><input type="email" class="form-control" required></div>
+            <div class="mb-3"><label>Mensaje</label><textarea class="form-control" required></textarea></div>
+            
+            <hr>
+            <h5>Cuestionario Ecológico (Sin Papel)</h5>
+            <p>¿Te gustaría recibir tu factura digitalmente para ahorrar papel?</p>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="eco" id="si">
+                <label class="form-check-label" for="si">Sí, salvar árboles.</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="eco" id="no">
+                <label class="form-check-label" for="no">No, prefiero impreso.</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+        </form>
+    </div>
+
+    <div class="tab-pane fade" id="chat">
+        <h3>Chat de Soporte</h3>
+        <div class="border p-3 mb-3" style="height: 200px; overflow-y: scroll; background: #f9f9f9;">
+            <p><strong>Bot:</strong> Hola, ¿en qué puedo ayudarte hoy?</p>
+            <p><strong>Bot:</strong> Escribe "Horario" o "Dirección".</p>
+        </div>
+        <input type="text" class="form-control" placeholder="Escribe tu pregunta aquí..." onblur="alert('El experto no está disponible, por favor llama al 555-1234')">
+    </div>
+
+    <div class="tab-pane fade" id="faq">
+        <h3>Preguntas Frecuentes</h3>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">¿Tienen opciones veganas?</button></h2>
+                <div id="collapseOne" class="accordion-collapse collapse show"><div class="accordion-body">Sí, tenemos una sección dedicada en el menú.</div></div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">¿Hacen entregas a domicilio?</button></h2>
+                <div id="collapseTwo" class="accordion-collapse collapse"><div class="accordion-body">Sí, a 5km a la redonda.</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function publicarComentario() {
+        let texto = document.getElementById('inputComentario').value;
+        if(texto) {
+            let area = document.getElementById('areaComentarios');
+            area.innerHTML += '<div class="alert alert-secondary">Usuario: ' + texto + '</div>';
+            document.getElementById('inputComentario').value = '';
+        }
+    }
+</script>
+
+<?php include 'footer.php'; ?>
