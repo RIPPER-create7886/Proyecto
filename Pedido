@@ -1,0 +1,81 @@
+<?php include 'header.php'; ?>
+
+<h2>Nuestro Menú</h2>
+<div class="row" id="lista-productos">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Hamburguesa Especial</h5>
+                <p class="card-text">Carne angus, queso y tocino. $150</p>
+                <button class="btn btn-primary" onclick="agregarAlPedido('Hamburguesa Especial')">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Pasta Alfredo</h5>
+                <p class="card-text">Salsa blanca cremosa con pollo. $120</p>
+                <button class="btn btn-primary" onclick="agregarAlPedido('Pasta Alfredo')">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Ensalada César</h5>
+                <p class="card-text">Lechuga fresca, aderezo y crotones. $90</p>
+                <button class="btn btn-primary" onclick="agregarAlPedido('Ensalada César')">Agregar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="card bg-light p-4">
+    <h3>Realizar Pedido</h3>
+    <form id="formPedido" onsubmit="enviarPedido(event)">
+        <div class="mb-3">
+            <label for="cliente" class="form-label">Tu Nombre</label>
+            <input type="text" class="form-control" id="cliente" required>
+        </div>
+        <div class="mb-3">
+            <label for="seleccion" class="form-label">Tu Selección</label>
+            <textarea class="form-control" id="seleccion" rows="3" readonly></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Enviar Pedido a Cocina</button>
+    </form>
+</div>
+
+<script>
+    // Lógica JavaScript para el pedido
+    let pedidoActual = [];
+
+    function agregarAlPedido(item) {
+        pedidoActual.push(item);
+        document.getElementById('seleccion').value = pedidoActual.join(", ");
+        alert(item + " agregado al carrito.");
+    }
+
+    function enviarPedido(event) {
+        event.preventDefault(); // Evita que la página se recargue
+        let cliente = document.getElementById('cliente').value;
+        let items = document.getElementById('seleccion').value;
+
+        if(items === "") {
+            alert("Por favor selecciona al menos un platillo.");
+            return;
+        }
+
+        // Simulación de envío
+        alert("¡Gracias " + cliente + "! Tu pedido de: " + items + " ha sido enviado a la cocina.");
+        
+        // Limpiar
+        pedidoActual = [];
+        document.getElementById('seleccion').value = "";
+        document.getElementById('cliente').value = "";
+    }
+</script>
+
+<?php include 'footer.php'; ?>
